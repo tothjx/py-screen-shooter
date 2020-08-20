@@ -5,13 +5,15 @@ import keyboard
 from datetime import datetime
 from PIL import ImageGrab
 
-# BUNDLE:
-# pyinstaller main.spec
-# ONEFILE:
-# pyinstaller --onefile main.py --name=screenshooter --hiddenimport=os --hiddenimport=sys --hiddenimport=keyboard._winkeyboard --hiddenimport=datetime.datetime --hiddenimport=PIL.ImageGrab
+'''
+BUNDLE:
+pyinstaller main.spec
+ONEFILE:
+pyinstaller --onefile main.py --name=screenshooter --hiddenimport=os --hiddenimport=sys --hiddenimport=keyboard._winkeyboard --hiddenimport=datetime.datetime --hiddenimport=PIL.ImageGrab
+'''
 
 APP_NAME = 'ScreenShooter'
-APP_VER = '1.1.1'
+APP_VER = '1.1.2'
 KEY_SCREEN = 'f12'
 KEY_EXIT = 'ctrl+end'
 HELP_1 = 'make a screenshot: ' + KEY_SCREEN.upper()
@@ -38,11 +40,11 @@ class ScreenShooter:
 		self.log(POINT_START)
 		self.log(LINE)
 		self.save_path = SAVE_PATH
-		self.log('save_path = %s' % self.save_path)
+		self.log('save_path: %s' % self.save_path)
 		self.game_dir = self.getGameDir()
-		self.log('game_dir = %s' % self.game_dir)
+		self.log('game_dir: %s' % self.game_dir)
 		self.full_path = self.getFullPath()
-		self.log('full_path = %s' % self.full_path)
+		self.log('full_path: %s' % self.full_path)
 		self.img_path = ''
 		self.log('img_path is initialized...')
 		self.log(LINE)
