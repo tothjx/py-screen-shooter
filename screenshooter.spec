@@ -1,13 +1,13 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
-hidden_imports = ['os', 'sys', 'keyboard._winkeyboard', 'datetime.datetime', 'PIL.ImageGrab']
+
 
 a = Analysis(['main.py'],
              pathex=['c:\\pydir\\project\\py-screen-shooter'],
              binaries=[],
              datas=[],
-             hiddenimports=hidden_imports,
+             hiddenimports=['os', 'sys', 'keyboard._winkeyboard', 'datetime.datetime', 'PIL.ImageGrab'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -19,19 +19,15 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
+          a.binaries,
+          a.zipfiles,
+          a.datas,
           [],
-          exclude_binaries=True,
-          name='main',
+          name='screenshooter',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
+          upx_exclude=[],
+          runtime_tmpdir=None,
           console=True )
-coll = COLLECT(exe,
-               a.binaries,
-               a.zipfiles,
-               a.datas,
-               strip=False,
-               upx=True,
-               upx_exclude=[],
-               name='main')
