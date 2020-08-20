@@ -11,12 +11,14 @@ from PIL import ImageGrab
 # pyinstaller --onefile main.py --name=screenshooter --hiddenimport=os --hiddenimport=sys --hiddenimport=keyboard._winkeyboard --hiddenimport=datetime.datetime --hiddenimport=PIL.ImageGrab
 
 APP_NAME = 'ScreenShooter'
-APP_VER = '1.1.0'
+APP_VER = '1.1.1'
 KEY_SCREEN = 'f12'
 KEY_EXIT = 'ctrl+end'
+HELP_1 = 'make a screenshot: ' + KEY_SCREEN.upper()
+HELP_2 = 'exit: ' + KEY_EXIT.upper()
 ENV_PROD = 'prod'
 ENV_DEV = 'dev'
-ENV = ENV_DEV
+ENV = ENV_PROD
 DIR_SEP = '\\'
 LINE = '########################################'
 SAVE_PATH = 'C:' + DIR_SEP + 'screenshot'
@@ -43,6 +45,7 @@ class ScreenShooter:
 		self.log('full_path = %s' % self.full_path)
 		self.img_path = ''
 		self.log('img_path is initialized...')
+		self.log(LINE)
 		print()
 
 	def getGameDir(self):
@@ -68,7 +71,7 @@ class ScreenShooter:
 		# <PIL.PngImagePlugin.PngImageFile image mode=RGBA size=5120x2880 at 0x110BB7748>
 		img_name = self.getFormatTime() + '.png'
 		self.img_path = self.full_path + DIR_SEP + img_name
-		self.log('img_path = ' + self.img_path)
+		# self.log('img_path = ' + self.img_path)
 		screen.save(self.img_path)
 		print('screenshot saved: %s' % self.img_path)
 
@@ -93,8 +96,10 @@ class ScreenShooter:
 
 	def showAbout(self):
 		self.log(LINE)
-		self.log('# ' + APP_NAME)
-		self.log('# version: ' + APP_VER)
+		self.log(APP_NAME)
+		self.log('version: ' + APP_VER)
+		self.log(HELP_1)
+		self.log(HELP_2)
 		self.log(LINE)
 		print()
 
