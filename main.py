@@ -29,6 +29,7 @@ FORMAT_HUMAN = 'human'
 FORMAT_TS = 'ts'
 POINT_START = 'starting point'
 POINT_SAVE = 'saving point'
+FILE_EXT = '.jpg' # or .png
 
 ########################################
 # class ScreenShooter
@@ -70,8 +71,9 @@ class ScreenShooter:
 
 	def grabScreen(self):
 		screen = ImageGrab.grab()
+		filename = self.getFormatTime()
 		# <PIL.PngImagePlugin.PngImageFile image mode=RGBA size=5120x2880 at 0x110BB7748>
-		img_name = self.getFormatTime() + '.png'
+		img_name = filename + FILE_EXT
 		self.img_path = self.full_path + DIR_SEP + img_name
 		# self.log('img_path = ' + self.img_path)
 		screen.save(self.img_path)
