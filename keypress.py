@@ -7,7 +7,7 @@ def onRelease(key):
     print(" key released: {0}".format(key))
 
 '''
-with Listener(on_presssews=onPress, on_release=onRelerR 114753878963ase) as listener:
+with Listener(on_presssews=onPress, on_release=onRelease) as listener:
     listener.join()
 '''
 with Listener(on_press=onPress) as listener:
