@@ -4,10 +4,10 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['c:\\pydir\\project\\py-screen-shooter'],
+             pathex=['C:\\pydir\\project\\py-screen-shooter'],
              binaries=[],
              datas=[],
-             hiddenimports=['os', 'sys', 'keyboard._winkeyboard', 'datetime.datetime', 'PIL.ImageGrab'],
+             hiddenimports=['os', 'sys', 'time', 'keyboard._winkeyboard', 'datetime.datetime', 'PIL.ImageGrab'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],

@@ -1,6 +1,7 @@
 import os
 import sys
 import keyboard
+import time
 # import locale
 from datetime import datetime
 from PIL import ImageGrab
@@ -9,11 +10,11 @@ from PIL import ImageGrab
 BUNDLE:
 pyinstaller main.spec
 ONEFILE:
-pyinstaller --onefile main.py --name=screenshooter --hiddenimport=os --hiddenimport=sys --hiddenimport=keyboard._winkeyboard --hiddenimport=datetime.datetime --hiddenimport=PIL.ImageGrab
+pyinstaller --onefile main.py --name=screenshooter --hiddenimport=os --hiddenimport=sys --hiddenimport=time --hiddenimport=keyboard._winkeyboard --hiddenimport=datetime.datetime --hiddenimport=PIL.ImageGrab
 '''
 
 APP_NAME = 'ScreenShooter'
-APP_VER = '1.1.2'
+APP_VER = '1.2.0'
 KEY_SCREEN = 'f12'
 KEY_EXIT = 'ctrl+end'
 HELP_1 = 'make a screenshot: ' + KEY_SCREEN.upper()
@@ -96,7 +97,7 @@ class ScreenShooter:
 			return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second + '.' + micros
 		else:
 			# like timestamp
-			return year + month + day + hour + minute + second + micros
+			return year + month + day + '_' + hour + minute + second + '_' + micros
 
 	def showAbout(self):
 		self.log(LINE)
@@ -111,7 +112,8 @@ class ScreenShooter:
 		while True:
 			if keyboard.is_pressed(KEY_SCREEN):
 				self.grabScreen()
-				print()
+				#range(100000)
+				time.sleep(0.2)
 			elif keyboard.is_pressed(KEY_EXIT):
 				self.log('EXIT...')
 				sys.exit(0)

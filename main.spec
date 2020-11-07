@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
-hidden_imports = ['os', 'sys', 'keyboard._winkeyboard', 'datetime.datetime', 'PIL.ImageGrab']
+hidden_imports = ['os', 'sys', 'time', 'keyboard._winkeyboard', 'datetime.datetime', 'PIL.ImageGrab']
 
 a = Analysis(['main.py'],
              pathex=['c:\\pydir\\project\\py-screen-shooter'],
