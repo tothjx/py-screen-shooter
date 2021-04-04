@@ -4,13 +4,16 @@ import keyboard
 import time
 # import locale
 from datetime import datetime
-from PIL import ImageGrab
+# from PIL import ImageGrab
+import pyscreenshot as ImageGrab
 
 '''
 BUNDLE:
 pyinstaller main.spec
 ONEFILE:
-pyinstaller --onefile main.py --name=screenshooter --hiddenimport=os --hiddenimport=sys --hiddenimport=time --hiddenimport=keyboard._winkeyboard --hiddenimport=datetime.datetime --hiddenimport=PIL.ImageGrab
+pyinstaller 
+	--onefile main.py --name=screenshooter --hiddenimport=os --hiddenimport=sys --hiddenimport=time 
+	--hiddenimport=keyboard._winkeyboard --hiddenimport=datetime.datetime --hiddenimport=PIL.ImageGrab
 '''
 
 APP_NAME = 'ScreenShooter'
@@ -30,29 +33,32 @@ FORMAT_HUMAN = 'human'
 FORMAT_TS = 'ts'
 POINT_START = 'starting point'
 POINT_SAVE = 'saving point'
-FILE_EXT = '.jpg' # or .png
+# .jpg or .png
+FILE_EXT = '.jpg'
+
 
 ########################################
 # class ScreenShooter
 ########################################
 
+
 class ScreenShooter:
 	def __init__(self):
-		self.showAbout()
+		self.show_about()
 		self.log(POINT_START)
 		self.log(LINE)
 		self.save_path = SAVE_PATH
 		self.log('save_path: %s' % self.save_path)
-		self.game_dir = self.getGameDir()
+		self.game_dir = self.get_game_dir()
 		self.log('game_dir: %s' % self.game_dir)
-		self.full_path = self.getFullPath()
+		self.full_path = self.get_full_path()
 		self.log('full_path: %s' % self.full_path)
 		self.img_path = ''
 		self.log('img_path is initialized...')
 		self.log(LINE)
 		print()
 
-	def getGameDir(self):
+	def get_game_dir(self):
 		print('please enter the name of game!')
 		name_of_game = str(input())
 		if name_of_game != '':
@@ -61,18 +67,18 @@ class ScreenShooter:
 			self.log('using default directory: ' + GAME_DIR_DEFAULT)
 			return GAME_DIR_DEFAULT
 
-	def getFullPath(self):
+	def get_full_path(self):
 		full_path = self.save_path + DIR_SEP + self.game_dir
-		if os.path.exists(full_path) == False:
+		if os.path.exists(full_path):
+			print('directory is exist: %s' % full_path)
+		else:
 			os.mkdir(full_path)
 			print('directory created: %s' % full_path)
-		else:
-			print('directory is exist: %s' % full_path)
 		return full_path
 
-	def grabScreen(self):
+	def grab_screen(self):
 		screen = ImageGrab.grab()
-		filename = self.getFormatTime()
+		filename = self.get_format_time()
 		# <PIL.PngImagePlugin.PngImageFile image mode=RGBA size=5120x2880 at 0x110BB7748>
 		img_name = filename + FILE_EXT
 		self.img_path = self.full_path + DIR_SEP + img_name
@@ -81,7 +87,7 @@ class ScreenShooter:
 		print('screenshot saved: %s' % self.img_path)
 
 	# type = human | ts
-	def getFormatTime(self, type=FORMAT_TS):
+	def get_format_time(self, type=FORMAT_TS):
 		# locale.setlocale(locale.LC_ALL, '')
 		# datetime object and elements
 		dto = datetime.now()
@@ -99,7 +105,7 @@ class ScreenShooter:
 			# like timestamp
 			return year + month + day + '_' + hour + minute + second + '_' + micros
 
-	def showAbout(self):
+	def show_about(self):
 		self.log(LINE)
 		self.log(APP_NAME)
 		self.log('version: ' + APP_VER)
@@ -111,8 +117,8 @@ class ScreenShooter:
 	def run(self):
 		while True:
 			if keyboard.is_pressed(KEY_SCREEN):
-				self.grabScreen()
-				#range(100000)
+				self.grab_screen()
+				# range(100000)
 				time.sleep(0.2)
 			elif keyboard.is_pressed(KEY_EXIT):
 				self.log('EXIT...')
@@ -128,9 +134,5 @@ class ScreenShooter:
 # function main()
 ########################################
 
-def main():
-	shooter = ScreenShooter()
-	shooter.run()
 
-if __name__ == '__main__':
-	main()
+ScreenShooter().run()
