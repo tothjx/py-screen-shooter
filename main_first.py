@@ -6,7 +6,6 @@ import time
 from datetime import datetime
 # from PIL import ImageGrab
 import pyscreenshot as ImageGrab
-import pyautogui as pyag
 
 '''
 BUNDLE:
@@ -38,11 +37,12 @@ POINT_SAVE = 'saving point'
 FILE_EXT = '.jpg'
 
 
-class ScreenShooter:
-	########################################
-	# class ScreenShooter
-	########################################
+########################################
+# class ScreenShooter
+########################################
 
+
+class ScreenShooter:
 	def __init__(self):
 		self.show_about()
 		self.log(POINT_START)
@@ -77,8 +77,7 @@ class ScreenShooter:
 		return full_path
 
 	def grab_screen(self):
-		# screen = ImageGrab.grab()
-		screen = pyag.screenshot()
+		screen = ImageGrab.grab()
 		filename = self.get_format_time()
 		# <PIL.PngImagePlugin.PngImageFile image mode=RGBA size=5120x2880 at 0x110BB7748>
 		img_name = filename + FILE_EXT
